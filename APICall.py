@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream:Steam_Review_Extraction.py
-### Dependencies
-=======
 # !/usr/bin/python
 #
 # Copyright (C) 2023 Xinyu Dong, Mattew Yau.
@@ -15,7 +12,6 @@
 # limitations under the License.
 
 #### Dependencies
->>>>>>> Stashed changes:APICall.py
 import requests
 import pandas as pd
 import json
