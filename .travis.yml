@@ -1,0 +1,7 @@
+language: python
+python:
+  - "3.9"
+script:
+  - python -m pip install coverage
+  - python -m coverage run ./unittesting/SteamTestSuite.py
+  - python -m coverage report
