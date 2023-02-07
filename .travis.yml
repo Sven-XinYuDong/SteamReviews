@@ -8,7 +8,6 @@ before_install:
   - pip install -U pandas
   - pip install -U requests
   - pip install -U nltk
-  - pip install -U json
   - pip install -U textblob
   - pip install -U wordcloud
 script:
