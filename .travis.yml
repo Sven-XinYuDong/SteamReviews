@@ -1,7 +1,10 @@
 language: python
 python:
   - "3.9"
+# command to run tests
+before_install:
+  - pip install -U pip
+  - pip install -U pytest
+  - pip install -U pandas
 script:
-  - python -m pip install coverage
-  - python -m coverage run ./unittesting/SteamTestSuite.py
-  - python -m coverage report
+  - python SteamTestSuite.py

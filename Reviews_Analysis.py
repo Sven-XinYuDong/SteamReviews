@@ -11,7 +11,7 @@ from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 
 
-def Review_Sentiments_Labeling(df):
+def review_sentiments(df):
     '''
     This function will label each steam review with polarity, subjectivity and sentiment.
 
@@ -42,7 +42,7 @@ def Review_Sentiments_Labeling(df):
         print('Labeling failed, check the review dataframe')
 
 
-def Reveiew_Cloud_Glimpse(df):
+def reveiew_cloud(df):
     '''
     Plot a simple WordCloud for users to have a glimpse of the reveiws of a game.
     '''
@@ -66,7 +66,10 @@ def Reveiew_Cloud_Glimpse(df):
         plt.imshow(wordcloud)
         plt.axis("off")
         plt.tight_layout(pad = 0)
-
+        message = 'plot successfully'
         plt.show()
+
+        return message
+
     except Exception as ex:
         print('Cloud plot failed, check your dataframe stucture')
