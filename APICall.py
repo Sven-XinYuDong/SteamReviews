@@ -23,10 +23,13 @@ def get_reviews(appid, params={'json':1}):
     '''
     Get game reveiw data from steampowered API in JSON format
     '''
+    try:
+        url = 'https://store.steampowered.com/appreviews/'
+        response = requests.get(url=url+str(appid), params=params, headers={'User-Agent': 'Mozilla/5.0'})
+        return response.json()
 
-    url = 'https://store.steampowered.com/appreviews/'
-    response = requests.get(url=url+str(appid), params=params, headers={'User-Agent': 'Mozilla/5.0'})
-    return response.json()
+    except Exception as ex:
+        print('connection failed, check if the appid is valid')
 
 
 def get_n_reviews(appid, n = 40): ## Change this line to change number of reviews we want to obtain.
@@ -48,19 +51,23 @@ def get_n_reviews(appid, n = 40): ## Change this line to change number of review
         "num_per_page": 100,
         "review_type": "all"
     }
-    while n > 0:
-        params["cursor"] = cursor.encode()
-        n -= 1
+    try:
+        while n > 0:
+            params["cursor"] = cursor.encode()
+            n -= 1
 
-        response = get_reviews(appid, params)
-        cursor = response["cursor"]
+            response = get_reviews(appid, params)
+            cursor = response["cursor"]
 
-        d = response
-        d.pop('success')
-        d.pop('query_summary')
-        df = pd.DataFrame(d['reviews'])
-        reviews = pd.concat([reviews,df])
-    return reviews
+            d = response
+            d.pop('success')
+            d.pop('query_summary')
+            df = pd.DataFrame(d['reviews'])
+            reviews = pd.concat([reviews,df])
+        return reviews
+
+    except Exception as ex:
+        print('n out of bound')
 
 
 def review_cleaning(df):
@@ -95,16 +102,26 @@ def get_friend_list(steam_id):
     '''
 
     #Formulate url
+
     url_friends_prefix = " http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="
     url_tail = '&relationship=friend'
-    url = url_friends_prefix+key+'&steamid='+steam_id+url_tail
+    try:
+        url = url_friends_prefix+key+'&steamid='+steam_id+url_tail
 
-    response = requests.get(url)  #Get response
+    except Exception as ex:
+        print('key not found, use set_key(user_key) to set up Steam API key ')
 
-    #Return pandas DataFrame
-    friends = json.loads(response.text)
-    friends = pd.DataFrame(friends['friendslist']['friends'])
-    return friends
+    try:
+        response = requests.get(url)  #Get response
+
+        #Return pandas DataFrame
+        friends = json.loads(response.text)
+        friends = pd.DataFrame(friends['friendslist']['friends'])
+        return friends
+
+    except Exception as ex:
+        print('steamid not valid')
+
 
 
 #### get_games_owned(steam_id)
@@ -175,18 +192,22 @@ def compare_genres_preference(steam_id_list):
 
     id_genres_df = pd.DataFrame()
 
-    for steam_id in steam_id_list:
-        games_owned = get_games_owned(steam_id)
-        #Add genres infomation to game DataFrame
-        games_owned['genres'] = games_owned['appid'].apply(str).apply(get_game_genres)
+    try:
+        for steam_id in steam_id_list:
+            games_owned = get_games_owned(steam_id)
+            #Add genres infomation to game DataFrame
+            games_owned['genres'] = games_owned['appid'].apply(str).apply(get_game_genres)
 
-        #unnest genres into long Dataframe for Viz
-        long_tags = []
-        for tag in games_owned['genres']:
-            long_tags += tag
-        d = {'steamid': list(np.repeat(steam_id,len(long_tags))),
-             'genres':long_tags }
-        df = pd.DataFrame(d)
-        id_genres_df = pd.concat([id_genres_df,df])
+            #unnest genres into long Dataframe for Viz
+            long_tags = []
+            for tag in games_owned['genres']:
+                long_tags += tag
+            d = {'steamid': list(np.repeat(steam_id,len(long_tags))),
+                 'genres':long_tags }
+            df = pd.DataFrame(d)
+            id_genres_df = pd.concat([id_genres_df,df])
 
-    return id_genres_df
+        return id_genres_df
+
+    except Exception as ex:
+        print('compare failed, check if all steam in list is valid')
