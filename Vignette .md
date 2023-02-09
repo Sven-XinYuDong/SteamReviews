@@ -49,7 +49,7 @@ import altair as alt #Viz
 alt.Chart(id_genres).mark_square(opacity = 0.9
 ).encode(
     alt.X('steamid',title = 'Genre'),
-    alt.Y('genres',title = 'Palyer'),
+    alt.Y('genres',title = 'Player'),
     size='count()',
     color = 'count()'
 ).properties(width=150,title = 'Genre Preference Comparsion with Four Friends',height = 300)
