@@ -14,7 +14,7 @@ reviews_df_sentiments = RA.review_sentiments(reviews_df)
 RA.reveiew_cloud(reviews_df_sentiments)
 ```
 
-![word cloud](Project Planning/Presentation/Cloud.png)
+![word cloud](https://github.com/Sven-XinYuDong/SteamSMART/blob/main/Project%20Planning/Presentation/Cloud.png)
 
 
 
