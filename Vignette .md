@@ -35,7 +35,7 @@ alt.Chart(reviews_df_sentiments).mark_bar().encode(
 
 ```
 
-![Sentiments](Project Planning/Presentation/Sentiments.png)
+![Sentiments](https://github.com/Sven-XinYuDong/SteamSMART/blob/main/Project%20Planning/Presentation/Sentiments.png)
 
 ## Compare Genre preference with friends 
 
@@ -55,5 +55,5 @@ alt.Chart(id_genres).mark_square(opacity = 0.9
 ).properties(width=150,title = 'Genre Preference Comparsion with Four Friends',height = 300)
 ```
 
-![Sentiments](Project Planning/Presentation/Genre Preference.png)
+![Sentiments](https://github.com/Sven-XinYuDong/SteamSMART/blob/main/Project%20Planning/Presentation/Genre%20Preference.png)
 
