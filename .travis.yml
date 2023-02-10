@@ -10,6 +10,7 @@ before_install:
   - pip install -U nltk
   - pip install -U textblob
   - pip install -U wordcloud
+  - pip install -U altair
   - python -m pip install coverage
 script:
   - python -m coverage run ./unittesting/SteamTestSuite.py
