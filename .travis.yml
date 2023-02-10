@@ -10,5 +10,6 @@ before_install:
   - pip install -U nltk
   - pip install -U textblob
   - pip install -U wordcloud
+  - python -m pip install coverage
 script:
-  - python SteamTestSuite.py
+  - python -m coverage run ./unittesting/SteamTestSuite.py

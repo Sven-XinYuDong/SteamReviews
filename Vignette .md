@@ -1,8 +1,8 @@
 ## Get a WordCloud graph of reviews 
 
 ```python
-import APICall
-import Reviews_Analysis as RA
+import SteamFunctions.APICall as APICall
+import SteamFunctions.Reviews_Analysis as RA
 #Set API call key 
 APICall.set_key('3D41F12368AF3E305A8233ABFB965CA2')
 
@@ -56,4 +56,27 @@ alt.Chart(id_genres).mark_square(opacity = 0.9
 ```
 
 ![Sentiments](https://github.com/Sven-XinYuDong/SteamSMART/blob/main/Project%20Planning/Presentation/Genre%20Preference.png)
+
+## Plot Interactive Dashboard
+
+```python
+from SteamFunctions.SteamChartCreator import compare_chart, development_dashboard
+from SteamFunctions.SteamDataExtraction import extract_data
+from SteamFunctions.SteamDataFrameConverter import friendlist_to_dataframe, chart_dataframe
+
+#Get all relevant data from SteamAPI (e.g. friends list, games), listing your own Steam ID as the parameter. Steam ID's obtained from steamcommunity.com, clicking on your own profile in the top right, clicking view profile and then checking the last 17 digits in the website url link.
+rawSteamData = extract_data(76561197996661065)
+
+#Convert the extracted raw data into a data frame
+steamDataFrame = friendlist_to_dataframe(rawSteamData)
+
+#Convert the data frame into a format ready for plotting (but is less interpretable).
+chartSteamDataFrame = chart_dataframe(steamDataFrame)
+
+#Create dashboard.
+development_dashboard(chartSteamDataFrame)
+
+```
+
+![Dashboard](https://github.com/Sven-XinYuDong/SteamSMART/blob/main/Project%20Planning/Presentation/dashboard.png)
 

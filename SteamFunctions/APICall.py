@@ -137,6 +137,7 @@ def get_games_owned(steam_id):
 
     '''
     #Formulate url
+    key = "3D41F12368AF3E305A8233ABFB965CA2"
     url_owneGames_prefix = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="
     url_ownGames_tail = "&include_appinfo=1&format=json"
     url = url_owneGames_prefix+key+'&steamid='+steam_id+url_ownGames_tail
@@ -210,4 +211,4 @@ def compare_genres_preference(steam_id_list):
         return id_genres_df
 
     except Exception as ex:
-        print('compare failed, check if all steam in list is valid')
+        print(ex)
