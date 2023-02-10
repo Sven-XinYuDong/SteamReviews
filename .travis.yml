@@ -14,3 +14,4 @@ before_install:
   - pip install -U coverage
 script:
   - python -m coverage run ./unittesting/SteamTestSuite.py
+  - python -m coverage report
