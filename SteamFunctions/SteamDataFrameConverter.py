@@ -1,6 +1,22 @@
 import pandas as pd
 
 def friendlist_to_dataframe(friendNameList):
+    '''
+    This function converts the raw data extracted from Steam into a dataframe
+    format.
+
+    Parameters:
+        dict: friendNameList
+            This is the data source that has been obtained by the extract_data
+            function, or alternatively the get_game_prices function in the
+            SteamDataExtraction module (and is structured to be in a specific
+            format. See SteamDataExtract for more details.)
+
+    Returns:
+        Steam dataframe: Pandas dataframe
+            Pandas dataframe containing Steam information (e.g. prices of games,
+            person name)
+    '''
     fullLst = []
 
     for friend in friendNameList:
@@ -54,7 +70,19 @@ def friendlist_to_dataframe(friendNameList):
 
 
 def chart_dataframe(dataframe):
+    '''
+    This function takes a dataframe containing Steam information and transforms
+    it into the format required for plotting interactive dashboards.
 
+    Parameters:
+        dataframe: Pandas dataframe
+            Pandas dataframe containing Steam information (e.g. prices of games,
+            person name)
+    Returns:
+        dataframe: Transformed Pandas dataframe
+            Pandas dataframe that has been transformed (e.g. melted certain columns)
+            into a format ready plotting building interactive dashboards.
+    '''
     dataframe = dataframe.melt(["Name", "ProfilePicture", "GameList"])
 
 
